@@ -1,19 +1,54 @@
+# import sys
+# from PyQt5.QtWidgets import *
+# from PyQt5 import uic
+
+# form_class = uic.loadUiType("idle.ui")[0]
+
+# class WindowClass(QMainWindow, form_class):
+#     def __init__(self):
+#         super().__init__()
+#         self.setupUi(self)
+
+# if __name__ == "__main__":
+#     app = QApplication(sys.argv)
+
+#     myWindow = WindowClass()
+
+#     myWindow.show()
+
+#     app.exec_()
+
 import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import uic
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
 
-form_class = uic.loadUiType("idle.ui")[0]
 
-class WindowClass(QMainWindow, form_class):
+class MyApp(QWidget):
+
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        self.initUI()
 
-if __name__ == "__main__":
+    def initUI(self):
+        pixmap = QPixmap('imgs/EYES_EMOJI_400px.gif')
+
+        lbl_img = QLabel()
+        lbl_img.setPixmap(pixmap)
+        # lbl_size = QLabel('Width: '+str(pixmap.width())+', Height: '+str(pixmap.height()))
+        # lbl_size.setAlignment(Qt.AlignCenter)
+
+        vbox = QVBoxLayout()
+        vbox.addWidget(lbl_img)
+        # vbox.addWidget(lbl_size)
+        self.setLayout(vbox)
+
+        self.setWindowTitle('QPixmap')
+        self.move(300, 300)
+        self.showMaximized()
+
+
+if __name__ == '__main__':
     app = QApplication(sys.argv)
-
-    myWindow = WindowClass()
-
-    myWindow.show()
-
-    app.exec_()
+    ex = MyApp()
+    sys.exit(app.exec_())
